@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAllFavoriteMovies } from '../../store/movieSlice';
+
 import './index.css';
 
 function ListPage() {
-    const [movies] = useState([
-        { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
-    ])
+
+    const favoritesList = useSelector(selectAllFavoriteMovies);
+    // const dispatch = useDispatch();
+
+    // const [movies] = useState([
+    //     { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
+    // ])
 
     // const componentDidMount() {
     //     const id = this.props.match.params;
@@ -17,10 +23,10 @@ function ListPage() {
         <div className="list-page">
             <h1 className="list-page__title">Мой список</h1>
             <ul>
-                {movies.map((item) => {
+                {favoritesList?.map((item) => {
                     return (
                         <li key={item.imdbID}>
-                            <a href="https://www.imdb.com/title/tt0068646/" target="_blank">{item.title} ({item.year})</a>
+                            <a href={`https://www.imdb.com/title/${item.imdbID}`} target="_blank">{item.Title} ({item.Year})</a>
                         </li>
                     );
                 })}

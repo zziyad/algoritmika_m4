@@ -19,9 +19,12 @@ function SearchBox() {
   const searchBoxSubmitHandler = (e) => {
     e.preventDefault();
 
+
   }
 
   const searchLineChangeHandler = (e) => {
+    e.preventDefault();
+
     const query = e.target.value;
     setQuery(query);
   }
@@ -53,8 +56,8 @@ function SearchBox() {
       <div>
         {data?.Search?.length > 0 && <Movies {...data} />}
 
-          {/* // data?.Search?.map((movie) => <MovieItem {...movie} key={movie.imdbID} />) */}
-        
+        {/* // data?.Search?.map((movie) => <MovieItem {...movie} key={movie.imdbID} />) */}
+
       </div>
     </>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { selectAllFavoriteMovies, removeMoviesFromFavorites } from '../../store/movieSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './index.css';
 
@@ -32,9 +31,18 @@ function Favorites() {
           );
         })}
       </ul>
-      <Link to={'/list'}>
-        <button type="button" className="favorites__save" onClick={() => saveFavorites()}>Сохранить список</button>
-      </Link>
+
+      {favoritesList.length > 0 &&
+        <Link to={'/list'}>
+          <button type="button"
+            className="favorites__save"
+            onClick={() => saveFavorites()}
+          >
+            Сохранить список
+          </button>
+        </Link>
+      }
+
     </div>
   );
 }
