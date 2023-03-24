@@ -1,43 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectAllFavoriteMovies, removeMoviesFromFavorites } from '../../store/movieSlice';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './index.css';
-import { state } from '../../store/store';
 
 function Favorites() {
-  const [movies, setMovies] = useState([]);
+  const favoritesList = useSelector(selectAllFavoriteMovies);
+  const dispatch = useDispatch();
 
+  console.log(favoritesList);
 
-  useEffect(() => {
-    state.subscribe(() => {
-      const store = state.getState();
-      setMovies(store.favorites);
-    })
-  }, [])
-
-  const removeFromFavorites = (imdbID) => {
-    state.dispatch({
-      type: "REMOVE_FROM_FAVORITES",
-      payload: { imdbID }
-    })
+  const removeFromFavorites = (id) => {
+    dispatch(removeMoviesFromFavorites(id))
   }
 
   const saveFavorites = () => {
-    const appState = state.getState();
-    console.log(appState.favorites);
+    // const appState = state.getState();
+    // console.log(appState);
   }
 
   return (
     <div className="favorites">
       <input placeholder="Новый список" className="favorites__name" />
       <ul className="favorites__list">
-        {movies.map((item, index) => {
+        {favoritesList?.map((item, index) => {
           return (
             <div key={index}>
-              <li >{item.title} ({item.year}) <button onClick={() => removeFromFavorites(item.imdbID)}>X</button></li>
+              <li >{item.Title} ({item.Year}) <button onClick={() => removeFromFavorites(item.imdbID)}>X</button></li>
             </div>
           );
         })}
       </ul>
-      <button type="button" className="favorites__save" onClick={() => saveFavorites()}>Сохранить список</button>
+      <Link to={'/list'}>
+        <button type="button" className="favorites__save" onClick={() => saveFavorites()}>Сохранить список</button>
+      </Link>
     </div>
   );
 }

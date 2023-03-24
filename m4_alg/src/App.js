@@ -4,8 +4,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Header from "./components/Header/Header.js";
+import Header from "./components/Header/Header";
 import MainPage from "./pages/MainPage";
+import ListPage from './pages/ListPage'
+
 const Loyaut = () => {
   return (
     <>
@@ -28,8 +30,8 @@ const router = createBrowserRouter([
     ]
   },
   {
-    // path: "/test",
-    // element: <Test />
+    path: "/list",
+    element: <ListPage />
   },
 ]);
 

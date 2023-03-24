@@ -1,10 +1,13 @@
 import React from 'react';
 import './index.css';
 import SearchBox from '../../components/SearchBox/SearchBox';
-// import Movies from '../../components/Movies/Movies';
+import Movies from '../../components/Movies/Movies';
 import Favorites from '../../components/Favorites/Favorites';
 
 function MainPage() {
+
+
+
     return (
         <div className="main-page">
             <main className="main-page__content">
@@ -12,9 +15,9 @@ function MainPage() {
                     <div className="main-page__search-box">
                         <SearchBox />
                     </div>
-                    {/* <div className="main-page__movies">
+                    <div className="main-page__movies">
                         <Movies />
-                    </div> */}
+                    </div>
                 </section>
                 <aside className="main-page__favorites">
                     <Favorites />

@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import MovieItem from '../MovieItem/MovieItem';
 import './index.css';
-import { state } from '../../store/store';
 
-function Movies() {
-    const [movies, setMovie] = useState([]);
-
-    useEffect(() => {
-        const appState = state.getState();
-        setMovie(appState.movies);
-    }, [])
-
+function Movies({ Search }) {
     return (
         <ul className="movies">
-            {movies.map((movie) => (
+            {/* {renderMovie} */}
+            {Search?.map((movie) => (
                 <li className="movies__item" key={movie.imdbID}>
                     <MovieItem {...movie} />
                 </li>
