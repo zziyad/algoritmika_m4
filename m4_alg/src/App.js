@@ -27,12 +27,13 @@ const router = createBrowserRouter([
         path: "/",
         element: <MainPage />
       },
+      {
+        path: "/list/:id",
+        element: <ListPage />
+      },
     ]
   },
-  {
-    path: "/list",
-    element: <ListPage />
-  },
+
 ]);
 
 

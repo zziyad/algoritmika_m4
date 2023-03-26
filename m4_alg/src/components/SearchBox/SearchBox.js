@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useGetMoviesMutation } from '../../services/movieApi';
-import MovieItem from '../MovieItem/MovieItem';
 import Movies from '../Movies/Movies';
 import './index.css';
 
@@ -11,6 +10,7 @@ function SearchBox() {
 
   useEffect(() => {
     if (query) fetchMovie();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   const fetchMovie = async () => {
@@ -18,13 +18,9 @@ function SearchBox() {
   }
   const searchBoxSubmitHandler = (e) => {
     e.preventDefault();
-
-
   }
 
   const searchLineChangeHandler = (e) => {
-    e.preventDefault();
-
     const query = e.target.value;
     setQuery(query);
   }
