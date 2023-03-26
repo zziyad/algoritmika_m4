@@ -52,7 +52,6 @@ function SearchBox() {
       <div>
         {data?.Search?.length > 0 && <Movies {...data} />}
 
-        {/* // data?.Search?.map((movie) => <MovieItem {...movie} key={movie.imdbID} />) */}
 
       </div>
     </>

@@ -8,7 +8,7 @@ import './index.css';
 function Favorites() {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
-  const [createMovie, { data }] = useCreateMovieMutation();
+  const [createMovie] = useCreateMovieMutation();
   const favoritesList = useSelector(selectAllFavoriteMovies);
   const moviIdList = useSelector(selectAllMoviIdList);
   const dispatch = useDispatch();
