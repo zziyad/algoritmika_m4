@@ -6,6 +6,7 @@ import { useCreateMovieMutation } from '../../services/saveListApi'
 import './index.css';
 
 function Favorites() {
+
   const [title, setTitle] = useState('');
   const [createMovie] = useCreateMovieMutation();
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ function Favorites() {
 
 
   const saveFavorites = async () => {
+    if (title.trim() === '') return alert('Укажите имя списка ');
     const mylist = { title, movies }
     const result = await createMovie(mylist);
 
@@ -45,14 +47,13 @@ function Favorites() {
         })}
       </ul>
 
-      {favoritesList.length > 0 && title.length > 0 ?
+      {favoritesList.length > 0 &&
         <button type="button"
           className="favorites__save"
           onClick={() => saveFavorites()}
         >
           Сохранить список
         </button>
-        : <h4 style={{ color: 'red' }}>Укажите имя списка </h4>
       }
 
     </div>

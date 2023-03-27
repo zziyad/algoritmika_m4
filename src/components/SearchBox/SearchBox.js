@@ -11,23 +11,18 @@ function SearchBox() {
   const [getMovies, { data }] = useGetMoviesMutation();
 
   useEffect(() => {
-    const fetchMovie = async () => {
-      return await getMovies({ query: debounce });
-    }
     if (debounce.length > 0) fetchMovie();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounce]);
 
-
-  const searchBoxSubmitHandler = (e) => {
-    e.preventDefault();
+  const fetchMovie = async () => {
+    return await getMovies({ query: debounce });
   }
-
 
   return (
     <>
       <div className="search-box">
-        <form className="search-box__form" onSubmit={searchBoxSubmitHandler}>
+        <form className="search-box__form" onSubmit={(e) => e.preventDefault()}>
           <label className="search-box__form-label">
             Искать фильм по названию:
             <input
