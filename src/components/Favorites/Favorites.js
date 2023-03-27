@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { selectAllFavoriteMovies, selectAllMoviIdList, removeMoviesFromFavorites } from '../../store/movieSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useCreateMovieMutation } from '../../services/saveListApi'
+import { Link } from 'react-router-dom';
+import { useCreateMovieMutation } from '../../services/saveListApi';
 import './index.css';
 
 function Favorites() {
 
   const [title, setTitle] = useState('');
-  const [createMovie] = useCreateMovieMutation();
-  const navigate = useNavigate();
+  const [createMovie, { data, isLoading }] = useCreateMovieMutation();
+  // const navigate = useNavigate();
   const favoritesList = useSelector(selectAllFavoriteMovies);
   const movies = useSelector(selectAllMoviIdList);
   const dispatch = useDispatch();
+  const [showLink, setShowLink] = useState(false);
+
 
   const removeFromFavorites = (id) => {
     dispatch(removeMoviesFromFavorites(id))
@@ -22,12 +24,8 @@ function Favorites() {
   const saveFavorites = async () => {
     if (title.trim() === '') return alert('Укажите имя списка ');
     const mylist = { title, movies }
-    const result = await createMovie(mylist);
-
-    if (result.data) {
-      const id = result.data.id;
-      navigate(`/list/${id}`);
-    }
+    await createMovie(mylist);
+    setShowLink(true);
   }
 
   return (
@@ -47,14 +45,13 @@ function Favorites() {
         })}
       </ul>
 
-      {favoritesList.length > 0 &&
-        <button type="button"
-          className="favorites__save"
-          onClick={() => saveFavorites()}
-        >
-          Сохранить список
+      {!showLink ? (
+        <button type="submit" disabled={isLoading} onClick={() => saveFavorites()}>
+          {isLoading ? 'Creating movie...' : 'Create movie'}
         </button>
-      }
+      ) : (
+        <Link to={`/list/${data.id}`}>Go to movie list {title}</Link>
+      )}
 
     </div>
   );
