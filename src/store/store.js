@@ -16,3 +16,4 @@ export const store = configureStore({
 });
 
 export const { useCreateMovieMutation } = apiSlice4;
+export const { useGetMoviesMutation } = movieApi

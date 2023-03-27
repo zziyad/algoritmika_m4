@@ -2,28 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { useGetMoviesMutation } from '../../services/movieApi';
 import Movies from '../Movies/Movies';
 import './index.css';
+import useDebounce from '../../hooks/useDebounce';
+
 
 function SearchBox() {
   const [query, setQuery] = useState('');
-
+  const debounce = useDebounce(query, 1000);
   const [getMovies, { data }] = useGetMoviesMutation();
 
   useEffect(() => {
-    if (query) fetchMovie();
+    const fetchMovie = async () => {
+      return await getMovies({ query: debounce });
+    }
+    if (debounce.length > 0) fetchMovie();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, [debounce]);
 
-  const fetchMovie = async () => {
-    await getMovies({ query });
-  }
+
   const searchBoxSubmitHandler = (e) => {
     e.preventDefault();
   }
 
-  const searchLineChangeHandler = (e) => {
-    const query = e.target.value;
-    setQuery(query);
-  }
 
   return (
     <>
@@ -36,7 +35,7 @@ function SearchBox() {
               type="text"
               className="search-box__form-input"
               placeholder="Например, Shawshank Redemption"
-              onChange={searchLineChangeHandler}
+              onChange={(e) => setQuery(e.target.value)}
             />
           </label>
           <button
