@@ -1,5 +1,10 @@
+import {
+  selectAllFavoriteMovies,
+  selectAllMoviIdList,
+  removeMoviesFromFavorites,
+  addToSaveListId
+} from '../../store/movieSlice';
 import React, { useState } from 'react';
-import { selectAllFavoriteMovies, selectAllMoviIdList, removeMoviesFromFavorites } from '../../store/movieSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useCreateMovieMutation } from '../../services/saveListApi';
@@ -24,8 +29,13 @@ function Favorites() {
   const saveFavorites = async () => {
     if (title.trim() === '') return alert('Укажите имя списка ');
     const mylist = { title, movies }
-    await createMovie(mylist);
-    setShowLink(true);
+    const result = await createMovie(mylist);
+
+    if (result.data) {
+      const id = result.data.id;
+      dispatch(addToSaveListId(id));
+      setShowLink(true);
+    }
   }
 
   return (

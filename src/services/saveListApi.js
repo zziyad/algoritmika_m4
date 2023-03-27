@@ -13,7 +13,11 @@ export const apiSlice4 = createApi({
         body: movie,
       }),
     }),
+    getMovieById: builder.query({
+      query: (id) => `/movies/list/${id}`,
+    }),
   }),
+  
 });
 
-export const { useCreateMovieMutation } = apiSlice4;
+export const { useCreateMovieMutation, useGetMovieByIdQuery } = apiSlice4;
