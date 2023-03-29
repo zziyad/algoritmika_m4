@@ -61,7 +61,7 @@ function Favorites() {
           {isLoading ? 'Creating movie...' : 'Create movie'}
         </button>
       ) : (
-        <div style={{ 'margin-left': '42px' }}>
+        <div style={{ 'marginLeft': '42px' }}>
           <Link to={`/list/${data.id}`} >Go to movie list {title}</Link>
         </div>
       )}

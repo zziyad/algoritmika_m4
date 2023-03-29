@@ -18,7 +18,6 @@ const moviesSlice = createSlice({
       state.favorites = state.favorites.filter((movie) => movie.imdbID !== payload);
     },
     addToSaveListId: (state, { payload }) => {
-      console.log('payload', payload);
       state.saveListId.push(payload)
     }
   },
