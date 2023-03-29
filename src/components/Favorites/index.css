@@ -11,7 +11,7 @@ ul {
   border: none;
   background-color: #496ddb;
   padding: 5px 15px;
-  margin-left: 45px;
+  /* margin-left: 45px; */
   color: #ffeedb;
   font-size: 14px;
   transition: all 0.2s linear;
