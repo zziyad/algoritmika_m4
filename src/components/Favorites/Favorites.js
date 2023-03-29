@@ -55,12 +55,15 @@ function Favorites() {
         })}
       </ul>
 
+
       {!showLink ? (
-        <button type="submit" disabled={isLoading} onClick={() => saveFavorites()}>
+        <button className='myBtn' type="submit" disabled={isLoading} onClick={() => saveFavorites()}>
           {isLoading ? 'Creating movie...' : 'Create movie'}
         </button>
       ) : (
-        <Link to={`/list/${data.id}`}>Go to movie list {title}</Link>
+        <div style={{ 'margin-left': '42px' }}>
+          <Link to={`/list/${data.id}`} >Go to movie list {title}</Link>
+        </div>
       )}
 
     </div>
